@@ -1,22 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Linq;
+using System;
+using Assets.Scripts;
 
-public class ControllerManager : MonoBehaviour {
-
-    public GameObject Player;
+public class ControllerManager : ContollerBaseMonoBehavior
+{
     public float MovingSpeed = 2;
     public float JumpingForce = 20000;
     public LayerMask[] groundLayers = new LayerMask[0];
 
     private Vector2 _stepsToMove;
     private Rigidbody2D _playerRigidBody;
-    private BoxCollider2D _playerCollider;
-
-    void Start()
+    
+    override protected void Start()
     {
+        base.Start();
         _playerRigidBody = Player.GetComponent<Rigidbody2D>();
-        _playerCollider = Player.GetComponent<BoxCollider2D>();
     }
 
     public void OnJumpButtonClick()
@@ -27,10 +27,6 @@ public class ControllerManager : MonoBehaviour {
     private bool CanJump()
     {
         return groundLayers.Any(layer => _playerCollider.IsTouchingLayers(layer.value));
-    }
-
-    public void OnFireButtonClick()
-    {
     }
 
     public void OnLeftButtonClick(bool isReleased)
