@@ -3,9 +3,18 @@ using System.Collections;
 
 public class Fire : MonoBehaviour {
 
-    public int Speed;
+    public int Speed { get; set; }
+
+    private Rigidbody2D _ammoRigidBody;
+    void Start()
+    {
+        _ammoRigidBody = GetComponent<Rigidbody2D>();
+    }
 
 	void Update () {
-        transform.position = new Vector3(transform.position.x + (Speed * Time.deltaTime), transform.position.y, transform.position.z);
+        if (_ammoRigidBody != null)
+        {
+            transform.rotation = new Quaternion(_ammoRigidBody.velocity.x, _ammoRigidBody.velocity.y, transform.rotation.z, transform.rotation.w);
+        }
 	}
 }
