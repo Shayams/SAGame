@@ -39,7 +39,7 @@ public class FireButtonController : ContollerBaseMonoBehavior
 
     void Update()
     {
-        if (!UseFireButton && Input.GetMouseButtonDown(0)) _fire();
+        if (!UseFireButton && Input.GetMouseButtonDown(0) && Input.mousePosition.y > 65) _fire();
     }
 
     private void FireWithoutForce()
@@ -50,7 +50,6 @@ public class FireButtonController : ContollerBaseMonoBehavior
 
     private void FireWithForce()
     {
-        Debug.Log(Input.mousePosition);
         var ammo = CreateAmmoObject();
         UpdateFireSpeed(ammo.GetComponent<Fire>(), 0);
         var ammoRigidBody = ammo.GetComponent<Rigidbody2D>();
@@ -68,7 +67,7 @@ public class FireButtonController : ContollerBaseMonoBehavior
 
     private GameObject CreateAmmoObject()
     {
-        var exitPosition = new Vector3(Player.transform.position.x + _playerCollider.bounds.size.x + 20, Player.transform.position.y, Player.transform.position.z);
+        var exitPosition = new Vector3(Player.transform.position.x + _playerCollider.bounds.size.x - 20, Player.transform.position.y, Player.transform.position.z);
 
         var ammo = Instantiate(_weaponHandler.GetAmmo(), exitPosition, new Quaternion(Player.transform.rotation.x, Player.transform.rotation.y, 0, 0)) as GameObject;
         ammo.transform.SetParent(Player.transform.parent);

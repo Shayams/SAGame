@@ -6,6 +6,7 @@ public class Fire : MonoBehaviour {
     public int Speed { get; set; }
 
     private Rigidbody2D _ammoRigidBody;
+
     void Start()
     {
         _ammoRigidBody = GetComponent<Rigidbody2D>();
@@ -14,7 +15,7 @@ public class Fire : MonoBehaviour {
 	void Update () {
         if (_ammoRigidBody != null)
         {
-            transform.rotation = new Quaternion(_ammoRigidBody.velocity.x, _ammoRigidBody.velocity.y, transform.rotation.z, transform.rotation.w);
+            transform.position = new Vector3(transform.position.x + (Speed * Time.deltaTime), transform.position.y);
         }
 	}
 }
