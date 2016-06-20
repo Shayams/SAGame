@@ -5,17 +5,16 @@ using UnityEngine;
 
 namespace Assets
 {
-    public class EnemiesCreator : MonoBehaviour
+    public class EnemiesCreator : ScriptableObject
     {
         public GameObject Enemy { get; private set; }
         public GameObject Player { get; private set; }
 
         public EnemiesCreator(GameObject player, GameObject enemyPrefab)
         {
-            Enemy = enemyPrefab;
             Player = player;
+            Enemy = Instantiate(enemyPrefab);
 
-            Enemy = Instantiate(Enemy);
             Enemy.SetActive(false);
             Enemy.transform.SetParent(Player.transform.parent);
         }
@@ -48,7 +47,6 @@ namespace Assets
         public static EnemiesCreator WithRandomPosition(this EnemiesCreator enemiesCreator)
         {
             var playerPosition = enemiesCreator.Player.transform.position;
-            var canvasTransform = enemiesCreator.Player.transform.parent.GetComponent<RectTransform>();
 
             var minX = Camera.main.ViewportToWorldPoint(new Vector3(Camera.main.rect.xMin, 0, Camera.main.transform.position.z)).x;
             var maxX = Camera.main.ViewportToWorldPoint(new Vector3(Camera.main.rect.xMax, 0, Camera.main.transform.position.z)).x;
@@ -63,8 +61,6 @@ namespace Assets
             };
 
             Debug.Log("min X = " + enemyBounds.xMin + " max X:" + enemyBounds.xMax);
-
-
             Debug.Log("min X = " + minX + " max X:" + maxX);
 
             return enemiesCreator;

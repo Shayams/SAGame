@@ -13,6 +13,6 @@ public class WeaponHandler : MonoBehaviour, IWeaponHandler
 
     public GameObject GetAmmo()
     {
-            return CurrentAmmo.gameObject;
+        return CurrentAmmo.gameObject;
     }
 }
