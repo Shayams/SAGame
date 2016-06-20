@@ -10,24 +10,20 @@ public class CreateOnTime : MonoBehaviour {
 
     public List<GameObject> Enemies;
     public GameObject Player;
-
-    private TimeSpan startTime;
     private Stopwatch watch = new Stopwatch();
-    // Use this for initialization
+
     void Start()
     {
-        //new EnemiesCreator(Player, Enemies.First()).WithRandomPosition().Activate();
-        startTime = new TimeSpan();
         watch.Start();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (watch.ElapsedMilliseconds >= 4000)
+        if (watch.ElapsedMilliseconds >= 6000)
         {
             new EnemiesCreator(Player, Enemies.First()).WithRandomPosition().Activate();
             watch.Reset();
+            watch.Start();
         }
     }
 }
