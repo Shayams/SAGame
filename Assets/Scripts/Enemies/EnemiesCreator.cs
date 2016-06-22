@@ -60,8 +60,8 @@ namespace Assets
                 y = 0
             };
 
-            Debug.Log("min X = " + enemyBounds.xMin + " max X:" + enemyBounds.xMax);
-            Debug.Log("min X = " + minX + " max X:" + maxX);
+           // Debug.Log("min X = " + enemyBounds.xMin + " max X:" + enemyBounds.xMax);
+           // Debug.Log("min X = " + minX + " max X:" + maxX);
 
             return enemiesCreator;
         }
