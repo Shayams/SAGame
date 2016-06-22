@@ -35,7 +35,7 @@ namespace Assets
             var canPlaceOnLeftSide = Mathf.Abs(playerXPosition - minXPosition) > spaceNeedForEnemy;
             var canPlaceOnRightSide = Mathf.Abs(maxXPosition - playerXPosition) > spaceNeedForEnemy;
 
-            var leftSideRect = new Rect(minXPosition, 0, playerXPosition, 0);
+            var leftSideRect = new Rect(minXPosition, 0, playerXPosition - minXPosition, 0);
             var rightSideRect = new Rect(playerXPosition, 0, maxXPosition - playerXPosition, 0);
 
             Rect selectedRect = canPlaceOnRightSide ? rightSideRect : leftSideRect;
@@ -60,8 +60,7 @@ namespace Assets
                 y = 0
             };
 
-           // Debug.Log("min X = " + enemyBounds.xMin + " max X:" + enemyBounds.xMax);
-           // Debug.Log("min X = " + minX + " max X:" + maxX);
+            Debug.Log("min X = " + enemyBounds.xMin + " max X:" + enemyBounds.xMax + " Selected " + enemiesCreator.Enemy.transform.position.x);
 
             return enemiesCreator;
         }
