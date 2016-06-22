@@ -10,7 +10,6 @@ public class HealthBarUpdater : MonoBehaviour {
         if (lifeCounter != null && healthBar != null)
         {
             healthBar.CurrentHealthPoints = lifeCounter.Life;
-            Debug.Log("created");
             var subscriber = lifeCounter.IsCountingStarted
                 .DoOnCompleted(()=>
                     lifeCounter.LifeObservable
