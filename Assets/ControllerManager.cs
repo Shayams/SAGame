@@ -52,12 +52,18 @@ public class ControllerManager : ContollerBaseMonoBehavior
 		// Character Jump
 		if (Input.GetKeyDown ("space")){
 			if (CanJump()) _playerRigidBody.AddForce(new Vector2(0, JumpingForce));
-		} 
+		}
 
-		// Character fire
-	
-		// Move Character left and right
-		if (Input.GetKey (KeyCode.RightArrow) || Input.GetKey (KeyCode.D)) {
+        // Character fire
+
+        if (Input.GetKeyDown("left ctrl"))
+        {
+            var fireButtonController = GetComponent<FireButtonController>();
+            if (fireButtonController != null) fireButtonController.OnFireButtonClick();
+        }
+
+        // Move Character left and right
+        if (Input.GetKey (KeyCode.RightArrow) || Input.GetKey (KeyCode.D)) {
 			Player.transform.Translate (Vector3.right * MovingSpeed);
 		} else if (Input.GetKey (KeyCode.LeftArrow) || Input.GetKey (KeyCode.A)) {
 			Player.transform.Translate (Vector3.right * -MovingSpeed);
