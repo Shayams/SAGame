@@ -10,14 +10,14 @@ public class HealthBarUpdater : MonoBehaviour {
         if (lifeCounter != null && healthBar != null)
         {
             healthBar.CurrentHealthPoints = lifeCounter.Life;
+            Debug.Log("created");
             var subscriber = lifeCounter.IsCountingStarted
-                .Where(x => x == true)
-                .First()
-                .Subscribe(_ =>
+                .DoOnCompleted(()=>
                     lifeCounter.LifeObservable
                     .Subscribe(currentLife => 
                     healthBar.CurrentHealthPoints = currentLife)
-                    );
+                    )
+                .Subscribe();
         }
 	}
 }

@@ -7,7 +7,12 @@ public class LifeCounter : MonoBehaviour
     public int Life;
     public IObservable<int> LifeObservable;
     // Ugly workaround to know when the Start function is done ( we cannot move the LifeObservable creation to ctor cause it does not have the gameObject
-    public ISubject<bool> IsCountingStarted = new Subject<bool>(); 
+    public ISubject<bool> IsCountingStarted;
+
+    public LifeCounter()
+    {
+        IsCountingStarted = new Subject<bool>();
+    }
 
     void Start()
     {
@@ -22,8 +27,8 @@ public class LifeCounter : MonoBehaviour
             .Select(_ => Life)
             .Share();
 
-        IsCountingStarted.OnNext(true); // Publish that the LifeObservable is initialized
-
+        IsCountingStarted.OnCompleted(); // Publish that the LifeObservable is initialized
+        
         LifeObservable.Where(currentLife => currentLife <= 0)
             .Subscribe(_ => Destroy(gameObject));
     }
