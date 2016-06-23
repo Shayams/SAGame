@@ -15,7 +15,7 @@ public class Fire : MonoBehaviour {
 	void Update () {
         if (_ammoRigidBody != null)
         {
-            transform.position = new Vector3(transform.position.x + (Speed * Time.deltaTime), transform.position.y);
+            transform.Translate(new Vector3(Speed * Time.deltaTime, 0));
         }
 	}
 }
