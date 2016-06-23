@@ -10,6 +10,9 @@ public class CreateOnTime : MonoBehaviour {
 
     public List<GameObject> Enemies;
     public GameObject Player;
+    public Vector2 StartPosition;
+    public long MsBetweenCreation = 6000;
+
     private Stopwatch watch = new Stopwatch();
 
     void Start()
@@ -19,11 +22,11 @@ public class CreateOnTime : MonoBehaviour {
 
     void Update()
     {
-        if (watch.ElapsedMilliseconds >= 6000)
+        if (watch.ElapsedMilliseconds >= MsBetweenCreation)
         {
             new EnemiesCreator(Player, Enemies.First())
                 .MoveTowardsTarget(Player)
-                .WithRandomPosition()
+                .SetPosition(StartPosition)
                 .Activate();
             watch.Reset();
             watch.Start();

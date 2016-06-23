@@ -44,6 +44,13 @@ namespace Assets
             return selectedRect;
         }
 
+        public static EnemiesCreator SetPosition(this EnemiesCreator enemiesCreator, Vector2 position)
+        {
+            enemiesCreator.Enemy.transform.position = position;
+
+            return enemiesCreator;
+        }
+
         public static EnemiesCreator WithRandomPosition(this EnemiesCreator enemiesCreator)
         {
             var playerPosition = enemiesCreator.Player.transform.position;

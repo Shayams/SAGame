@@ -17,11 +17,10 @@ public class MoveTowardsTarget : MonoBehaviour {
     private System.Random _random;
     void Start()
     {
-        _random = new System.Random();
-        Func<int> plusMinusGenerator = () => _random.Next(0, 1) * 2 - 1;
+        // Range - Max in Exclusive and not inclusize https://docs.unity3d.com/ScriptReference/Random.Range.html
+        Func<int> plusMinusGenerator = () => UnityEngine.Random.Range(0, 2) * 2 - 1;
 
         _randomMovingDir = plusMinusGenerator();
-
 
         ObservableCollision2DTrigger collisionObservable = gameObject.GetComponent<ObservableCollision2DTrigger>();
         collisionObservable = collisionObservable == null ? gameObject.AddComponent<ObservableCollision2DTrigger>() : collisionObservable;
