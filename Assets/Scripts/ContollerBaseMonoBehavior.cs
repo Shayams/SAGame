@@ -14,6 +14,13 @@ namespace Assets.Scripts
 
         virtual protected void Start()
         {
+            Init();
+        }
+
+        virtual public void Init()
+        {
+            if (Player == null) return;
+
             _playerCollider = Player.GetComponent<BoxCollider2D>();
         }
     }

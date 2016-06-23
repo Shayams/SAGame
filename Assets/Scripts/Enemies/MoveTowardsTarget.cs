@@ -14,7 +14,6 @@ public class MoveTowardsTarget : MonoBehaviour {
     public LayerMask[] groundLayers = new LayerMask[0];
 
     private int _randomMovingDir = 1;
-    private System.Random _random;
     void Start()
     {
         // Range - Max in Exclusive and not inclusize https://docs.unity3d.com/ScriptReference/Random.Range.html
