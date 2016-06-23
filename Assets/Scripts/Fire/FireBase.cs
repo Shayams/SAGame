@@ -18,7 +18,9 @@ public abstract class FireBase : ContollerBaseMonoBehavior
 
     protected GameObject CreateAmmoObject()
     {
-        var exitPosition = new Vector3(Player.transform.position.x + _playerCollider.bounds.size.x +(20* Player.transform.rotation.y) , Player.transform.position.y, Player.transform.position.z);
+        var rotationExp = (int)Player.transform.rotation.y == 0 ? 1 : -1;
+
+        var exitPosition = new Vector3(Player.transform.position.x + ((_playerCollider.bounds.size.x /2 ) * rotationExp) , Player.transform.position.y, Player.transform.position.z);
 
         var ammo = Instantiate(_weaponHandler.GetAmmo(), exitPosition, new Quaternion(Player.transform.rotation.x, Player.transform.rotation.y, 0, 0)) as GameObject;
         ammo.transform.SetParent(Player.transform.parent);
