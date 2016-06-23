@@ -25,6 +25,10 @@ public class CameraController : MonoBehaviour {
 	void Update () {
         var x = transform.position.x;
         var y = transform.position.y;
+        var cameraHalfWidth = Camera.main.orthographicSize * Camera.main.aspect;
+
+        bool isCameraDisplaysMoreThanBoundsWidth = cameraHalfWidth * 2 > Mathf.Abs(_min.x) + Mathf.Abs(_max.x);
+        bool isCameraDisplaysMoreThanBoundsHeight = Camera.main.orthographicSize * 2 > Mathf.Abs(_min.y) + Mathf.Abs(_max.y);
 
         if (IsFollowing)
         {
@@ -33,10 +37,8 @@ public class CameraController : MonoBehaviour {
             if (Mathf.Abs(y - Player.position.y) > Margin.y) y = Mathf.Lerp(y, Player.anchoredPosition.y, Smoothing.y * Time.deltaTime);
         }
 
-        var cameraHalfWidth = Camera.main.orthographicSize * ((float)Screen.width / Screen.height);
-
-        x = Mathf.Clamp(x, _min.x + cameraHalfWidth, _max.x - cameraHalfWidth);
-        y = Mathf.Clamp(y, _min.y + Camera.main.orthographicSize, _max.y - Camera.main.orthographicSize);
+        x = isCameraDisplaysMoreThanBoundsWidth ? transform.position.x : Mathf.Clamp(x, _min.x + cameraHalfWidth, _max.x - cameraHalfWidth);
+        y = isCameraDisplaysMoreThanBoundsHeight ? transform.position.y : Mathf.Clamp(y, _min.y + Camera.main.orthographicSize, _max.y - Camera.main.orthographicSize);
 
         transform.position = new Vector3(x, y, transform.position.z);
     }
