@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HealthBar : MonoBehaviour
 {
-    public int MaxHealthPoints = 100;
+    private int MaxHealthPoints;
     public int CurrentHealthPoints { get; set; }
 
     public Texture2D ProgressBarEmpty;
@@ -13,6 +13,8 @@ public class HealthBar : MonoBehaviour
 
     void Start()
     {
+        var lifeCounter = GetComponentInParent<LifeCounter>();
+        MaxHealthPoints = lifeCounter != null ? lifeCounter.Life : 100;
         CurrentHealthPoints = MaxHealthPoints;
 
         RectTransform rectTransform = GetComponent<RectTransform>();

@@ -11,3 +11,8 @@ public static class ExtentionMethods {
         return component;
     }
 }
+
+public static class Common
+{
+    public enum TagsEnum { Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Ammo, Enemy }
+}

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
+using System.Linq;
 
 public class LifeCounter : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class LifeCounter : MonoBehaviour
     public IObservable<int> LifeObservable;
     // Ugly workaround to know when the Start function is done ( we cannot move the LifeObservable creation to ctor cause it does not have the gameObject
     public ISubject<bool> IsCountingStarted;
+    public Common.TagsEnum[] TagsToIgnoreOnCollision;
+
 
     public LifeCounter()
     {
@@ -22,6 +25,7 @@ public class LifeCounter : MonoBehaviour
         LifeObservable = collisionObservable
             .OnCollisionEnter2DAsObservable()
             .Where(coll => coll.gameObject.GetComponent<DamageInfo>() != null)
+            .Where(coll => TagsToIgnoreOnCollision.All(tag => coll.gameObject.tag != tag.ToString()))
             .Select(coll => coll.gameObject.GetComponent<DamageInfo>().DamageHitPoints)
             .Do(damadgeHitPoints=>Life-=damadgeHitPoints)
             .Select(_ => Life)
