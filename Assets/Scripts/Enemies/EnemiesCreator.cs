@@ -60,7 +60,13 @@ namespace Assets
                 y = 0
             };
 
-            Debug.Log("min X = " + enemyBounds.xMin + " max X:" + enemyBounds.xMax + " Selected " + enemiesCreator.Enemy.transform.position.x);
+            return enemiesCreator;
+        }
+
+        public static EnemiesCreator MoveTowardsTarget(this EnemiesCreator enemiesCreator, GameObject target)
+        {
+            var moveTowardsTarget = enemiesCreator.Enemy.GetOrAddComponent<MoveTowardsTarget>();
+            moveTowardsTarget.Target = target;
 
             return enemiesCreator;
         }

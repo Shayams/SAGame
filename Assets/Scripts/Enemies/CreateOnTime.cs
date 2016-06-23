@@ -21,7 +21,10 @@ public class CreateOnTime : MonoBehaviour {
     {
         if (watch.ElapsedMilliseconds >= 6000)
         {
-            new EnemiesCreator(Player, Enemies.First()).WithRandomPosition().Activate();
+            new EnemiesCreator(Player, Enemies.First())
+                .MoveTowardsTarget(Player)
+                .WithRandomPosition()
+                .Activate();
             watch.Reset();
             watch.Start();
         }
