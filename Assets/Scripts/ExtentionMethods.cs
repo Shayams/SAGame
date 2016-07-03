@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+
 
 public static class ExtentionMethods {
     public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
@@ -14,5 +14,14 @@ public static class ExtentionMethods {
 
 public static class Common
 {
-    public enum TagsEnum { Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Ammo, Enemy }
+    public enum TagsEnum {
+        Untagged,
+        Respawn,
+        Finish,
+        EditorOnly,
+        MainCamera,
+        Player,
+        GameController,
+        AmmoArrow,
+        Enemy }
 }
